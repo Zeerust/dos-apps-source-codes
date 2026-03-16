@@ -1,0 +1,54 @@
+OOGrid Library(TM) v1.1 for Borland/Turbo Pascal (Real Mode/TV)
+Copyright (C) 1994 by Arturo J. Monge.  All rights reserved.
+Portions Copyright (C) 1989,1990 by Borland International, Inc.
+
+------------------------------------------------------------------------
+OOGrid Library(TM) v2.0 for Borland/Turbo Pascal
+OOGrid Library(TM) v1.0 for Turbo Pascal for Windows
+------------------------------------------------------------------------
+Expected Release Dates:    Not yet defined
+
+Distribution Method:       Shareware
+
+
+
+Version 2.0 for Turbo Vision
+----------------------------
+The next release of OOGrid Library(TM) (version 2.0) for Turbo Vision will be
+a completely re-designed version of OOGrid Library(TM) v1.0 that will address
+all the problems of version 1.0 while adding new features.
+
+The following is a list of expected features in OOGrid Library(TM) v2.0 for
+Borland/Turbo Pascal (Real Mode/TV):
+
+ 1-  A new data storage object that will allow an unlimited amount of cells
+     by using conventional, extended and virtual memory.
+ 2-  New search methods that will speed up access to information anywhere in
+     the spreadsheet.
+ 3-  Improved insert, delete and dispose methods with faster execution time.
+ 4-  New display methods that allow seeing partial columns in a window.
+ 5-  A new parser with different cell prefixes and new functions.
+ 6-  Support of relative and absolute cell addresses.
+ 7-  A 'cell tracking' method that will modify affected formulas whenever
+     cells referenced in the formula are moved to a different location.
+ 8-  Column hide and unhide commands.
+ 9-  Support for adding cell addresses to formulas by moving the cursor or by
+     pointing cells with the mouse.
+ 10- New import and export methods of common database and spreadsheet
+     formats.
+ 11- New and improved import and export methods of text and delimited files.
+ 12- Data filters.
+ 13- Date cells, date functions and memo cells.
+ 14- New formats.
+ 15- More flexible print methods.
+ 16- New selection lists in dialogs, to avoid entering the same information
+     twice.
+ 17- A hierarchy of objects to allow easier costumization.
+ 18- Extensive documentation.
+ 19- Support for protected mode
+
+Version 1.0 for Turbo Pascal for Windows
+----------------------------------------
+OOGrid Library(TM) v1.0 for Turbo Pascal for Windows will have the same
+features as OOGrid Library(TM) v2.0 for Borland/Turbo Pascal, and will be
+written using Borland's Object Windows Library (OWL).

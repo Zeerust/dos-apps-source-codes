@@ -1,0 +1,59 @@
+---------------------------------------------------------------------------
+OOGrid Library(TM) v1.1
+Copyright (C) 1994, 1995 by Arturo J. Monge
+Portions Copyright (C) 1989, 1990 by Borland International, Inc.
+---------------------------------------------------------------------------
+
+
+                             VENDORS INFORMATION
+                                       
+                                       
+The complete license agreement is in the file LICENSE.TXT.  The following
+is an extract of the license agreement concerning vendors:
+
+"2) OOGrid Library(TM) may be copied and distributed freely (including
+uploading it to bulletin boards), providing the package is not modified in
+any way.  You are specifically prohibited from charging or requesting
+donations, for any such copies, however made, and from distributing the
+software and/or documentation with other products (commercial or otherwise)
+without prior written permission from the author, with one exception:  disk
+vendors approved by the Association of Shareware Professionals are
+permitted to redistribute OOGrid Library(TM), subject to the conditions in
+this license, without specific written permission."
+
+
+
+SUGGESTED ONE LINE DESCRIPTION:
+
+     Spreadsheet library for Turbo Vision (TP6/TP7/BP7)
+
+
+
+SUGGESTED DESCRIPTION:
+
+OOGrid Library(TM) is a library of objects for Turbo Vision that provides a
+simple spreadsheet for use in your applications.  The spreadsheet in OOGrid
+Library(TM) can be used, for example, to manage lists, to browse and edit
+the data in a database, to create data entry screens or simply as an
+ordinary spreadsheet.  The library consists of one main object --
+TSpreadSheet -- and several auxiliary objects used by TSpreadSheet.  Some
+of these auxiliary objects (TLimScrollBar, TMessageLine, and TWindowList --
+the latter implemented in the demo program) can be used by other objects or
+applications not related to OOGrid Library(TM).
+
+This library works with Turbo Pascal 6.0 and Borland/Turbo Pascal 7.0, and
+can be used to create real mode applications only; it does not work
+properly in protected mode applications.
+
+
+
+ADDITIONAL INFORMATION:
+
+Requirements:  Turbo Pascal 6.0 or Borland/Turbo Pascal 7.0
+               Turbo Vision 1.0 or Turbo Vision 2.0
+
+Source code:   Yes (150+ pages)
+
+Documentation: Yes (200+ pages)
+
+Author:        Arturo J. Monge

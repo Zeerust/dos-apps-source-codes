@@ -1,0 +1,209 @@
+
+
+                         OOGrid Library(TM) v1.1
+                 for Borland/Turbo Pascal (Real Mode/TV)
+                          Release date 06/01/95
+                                    
+                                    
+                        Copyright (C) 1994, 1995
+                           by Arturo J. Monge
+                                    
+                                    
+                    Portions Copyright (C) 1989,1990
+                     by Borland International, Inc.
+                                    
+                                    
+                            REVISION HISTORY
+                                    
+
+SOURCE CODE
+-----------
+
+v1.1   06/01/95
+       
+       Changes:
+       
+       - Added the ability to display incomplete columns
+       
+       - Eliminated TSpreadsheet.DisplayBlankArea
+       
+       - Moved some code from TSpreadsheet InsertXXXX/DeleteXXXX
+       methods, to the InsertXXXXto/DeleteXXXXfrom methods, to
+       make the latter more independant (so that they can be used
+       also by other methods)
+       
+       - Changed the name of TSpreadsheet.GetFormat to
+       TSpreadsheet.FormatCells
+       
+       - Several methods in TSpreadsheet were split into two new
+       methods, for additional flexibility:
+         . ChangeColWidth into ChangeColWidth & ChangeWidth
+         . ChangeColHeader into ChangeColHeader & ChangeHeader
+         . GoToCell into GoToCell & GoToPos
+         . FormatCells into FormatCells & SetFormat
+       
+       - Changed the name of TSpreadsheet.DoAfterEndInput to
+       DoAfterAddingCell
+       
+       - Added TSpreadsheet.DoBeforeAddingCell method
+       
+       - Added TSpreadsheet.SetAvailableCommands method
+       
+       - Added the displaying of a 'Modified' character in the
+       info area, when the spreadsheet has been modified
+       
+       - Added a DisplayEnabled constant that indicates if the
+       spreadsheet is allowed to display itself.  This is usefull
+       when loading a spreadsheet just to retrieve the data and
+       you don't want it to be displayed at all
+       
+       - Eliminated TSpreadsheet.Number and
+       TSpreadsheet.SetNumber and added the method
+       TSpreadsheet.GetNumber
+       
+       - Added list of history id constants (hiXXXX) to
+       GLEQUATES.PAS and updated GLTVR_US.PAS and GLTVR_SP.PAS to
+       use the new constants in THistory Init methods
+       
+       - Added two new units:  GLBUILD.PAS and GLTVR_SP.PAS
+       
+       
+       Problems fixed:
+       
+       - Fixed error in scrollbar handling.
+       
+       - Added checking of the existence of scrollbars in
+       TSpreadsheet.Init method.  This was not done, causing an
+       error when TSpreadsheet was initiated without one or both
+       scrollbars.
+       
+       - Fixed error with cursor tracking (if the cursor was not
+       in screen and data was entered, the screen was not moved
+       to the position of the cursor).
+       
+       - Added missing calls to TSpreadsheet.SetChanged method
+       
+       - Fixed problem with the End status in MoveXXXX methods
+       
+       - Changed sDisplayNamesLetter to sDisplayHeadersLetter in
+       GLEQUATES.PAS (GLEquates was not using the correct
+       constant)
+       
+       
+       Demo Program:
+       
+       - Changed the use of the compiler directive DEFTP60 to
+       VER60
+       
+       - Added the checking of the validity of a new spreadsheet
+       before inserting it in the application
+       
+       - Added the disposing of the stream used when an error
+       ocurred while loading a spreadsheet.  This was causing a
+       memory leak.
+       
+v1.0   12/29/94
+
+       - Initial release of OOGrid Library(TM)
+
+
+
+DOCUMENTATION
+-------------
+
+v1.1   06/02/95
+       
+       The file MANUAL.TXT in version 1.1 is the same as the file
+       MANUAL.TXT in version 1.0.  The following are corrections
+       to the documentation and additions that are not included
+       in MANUAL.TXT.
+       
+       Corrections:
+       
+       - The author's e-mail address is no longer
+       
+       mongev@cariari.ucr.ac.cr
+       
+       It has changed to
+       
+       mongev@ns.fing.ucr.ac.cr
+       
+       (pg. 1)
+       
+       - RepeatTextChar should be RepeatFirstChar (pg. 38)
+       
+       - TSpreadsheet.DoAfterEndInput should be
+       TSpreadsheet.DoAfterAddingCell (pg. 147)
+       
+       - Missing documentation of TSpreadsheet.InsertColToHash
+       (pg. 158):
+       
+       Declaration
+       
+         procedure InsertColToHash(Block: TBlock; Cols,
+       StartInsCol: Word; var Deleted: Boolean); virtual,
+       
+       Unit
+       
+         GLTSHEET.PAS
+        
+       Description
+          
+         Inserts a col or block of columns in the spreadsheet's
+       hash tables.
+       
+       Parameters' description
+       
+         Block:  the block of cells that will be deleted (if
+       any); this block will always be the block of cells that
+       are located in the last columns of the spreadsheet and
+       that get pushed out when one or more columns are inserted.
+       
+         Cols:  the number of columns that will be inserted
+       
+         StartInsCol:  the column number where the new columns
+       will be inserted
+       
+         Deleted:  after a call to this procedure, this parameter
+       will contain a boolean value indicating if any cells were
+       deleted from the spreadsheet
+       
+       - TSpreadsheet.GetFormat should be
+       TSpreadsheet.FormatCells (pg. 154)
+       
+       - In the description of the unit GLTVR_US.PAS should be
+       indicated that GLTVR_SP.PAS is the spanish version of
+       GLTVR_US.PAS (pg. 5)
+       
+       Additions:
+       
+       - The following new methods, fields and constants have
+       been added to the some of the objects in OOGrid
+       Library(TM).  However, these new methods and fields are
+       not documented here, but in the source code directly, in
+       the form of comments.
+         .TSpreadsheet.ChangeWidth
+         .TSpreadsheet.ChangeHeader
+         .TSpreadsheet.DoBeforeAddingCell
+         .TSpreadsheet.GetNumber
+         .TSpreadsheet.GoToPos
+         .TSpreadsheet.SetFormat
+         .TSpreadsheet.SetAvailableCommands
+         .const DisplayEnabled
+        
+       - Description of GLBUILD.PAS:
+       
+       This unit lists in the USES clause all the units that are
+       part of OOGrid Library(TM) and can be used when
+       recompiling all the units in the library.
+          
+       - Description of the history ID constants (in
+       GLEQUATES.PAS):
+       
+       The hiXXXX constants are used in the units GLTVR_US.PAS
+       and GLTVR_SP.PAS.  They are included to allow easy
+       costumization of history numbers in the library.
+       
+       To modify the value of these constants, you must change
+       the value of the InitHistoryId constant (the default value
+       is 100).

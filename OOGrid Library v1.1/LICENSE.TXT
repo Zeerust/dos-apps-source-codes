@@ -1,0 +1,62 @@
+OOGRID LIBRARY(tm) v1.1 FOR BORLAND/TURBO PASCAL (REAL MODE/TV)
+---------------------------------------------------------------
+OOGrid Library(TM) is distributed as freeware.  However, the source code, the
+compiled units and the documentation included in this package is copyrighted
+material (see the copyright statement below).  You should carefully read the
+following terms and conditions before using this software.  Unless you have a
+different license agreement signed by Arturo J. Monge, your use of this
+software indicates your acceptance of this license agreement and warranty.
+
+COPYRIGHT
+---------
+OOGrid Library(TM) v1.1 for Borland/Turbo Pascal (Real Mode/TV)
+Copyright (C) 1994, 1995 by Arturo J. Monge.  All Rights Reserved.
+Portions Copyright (C) 1989, 1990 Borland International, Inc.
+
+OOGrid Library is a trademark of Arturo J. Monge.  Borland, Turbo Pascal and
+Turbo Vision are registered trademarks of Borland International, Inc.
+
+LICENSE AGREEMENT
+-----------------
+1) You are free to use this code within applications which you develop only
+as part of the executable code. You may not include any of this code as part
+of a library which you distribute, regardless of the manner in which you
+distribute the library.  A library is here defined as either source code
+files or compiled units which can be used with Borland's compilers and
+Borland's Turbo Vision.
+
+2) OOGrid Library(TM) may be copied and distributed freely (including
+uploading it to bulletin boards), providing the package is not modified in
+any way.  You are specifically prohibited from charging or requesting
+donations, for any such copies, however made, and from distributing the
+software and/or documentation with other products (commercial or otherwise)
+without prior written permission from the author, with one exception:  disk
+vendors approved by the Association of Shareware Professionals are permitted
+to redistribute OOGrid Library(TM), subject to the conditions in this
+license, without specific written permission.
+
+3) You may not copy, sublicense, distribute or transfer OOGrid Library(TM)
+and its associated documentation except as expressly provided under this
+License Agreement.  Any attempt otherwise to copy, sublicense, distribute or
+transfer OOGrid Library(TM) is void and your rights to use the program under
+this license agreement shall be automatically terminated.
+
+4) This license may be revoked by Arturo J. Monge without prior notice.
+
+DISCLAIMER OF WARRANTY
+----------------------
+Because OOGrid Library(TM) is licensed free of charge, the author provides
+absolutely no warranty.  Except when otherwise stated in writing, Arturo J.
+Monge provides OOGrid Library(TM) "AS IS" without warranty of any kind,
+either expressed or implied, including, but not limited to, the implied
+warranties of merchantability and fitness for a particular purpose.  The
+entire risk as to the quality and performance of OOGrid Library(TM) and the
+accuracy of its associated documentation, is with you.  Should OOGrid
+Library(TM) or its associated documentation prove defective, you assume the
+cost of all necessary servicing, repair or correction.
+
+In no event will Arturo J. Monge be liable to you for any damages, including
+but not limited to, loss of profits, loss of savings, loss of data, or other
+incidental or consequential damages arising out of the use or inability to
+use this program, even if Arturo J. Monge has been advised of the possibility
+of such damages.
