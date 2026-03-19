@@ -17,6 +17,13 @@ TVToys is a collection of useful stuff that should be available to all Turbo Vis
 Author: Far Niente Productions.  
 Release date: 1993/12/18.  
 
+tvDMX v2.6 for Turbo Pascal 7.0.  
+tvDMX is an object-oriented data entry platform for Turbo Vision with a mechanism to create scrolling forms, spreadsheets and tables.  
+Author: Randolph Beck (https://www.randybeck.com/tvdmx.shtml).  
+Release date: 1998/03/01.  
+
+
+
 
 
 
