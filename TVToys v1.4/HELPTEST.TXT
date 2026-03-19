@@ -1,0 +1,187 @@
+.topic Contents=0
+
+  Contents
+
+  {TopicA}
+  {TopicB}
+  {TopicC}
+
+This topic is shown when there are no previous topics or
+no Help context defined. This mimics the BP IDE behaviour.
+
+By default, the Contents help page is topic 0 and is defined
+in TOYPREFS. If you want to change this, use a help context file
+to override the TOYPREFS value, see TOYPREFS.
+
+
+.topic Dragging
+
+This topic has never worked.
+
+
+.topic HelpOnHelp=2
+
+  Help on Help
+
+Available commands shown on the Status line.
+
+By default, the HelpOnHelp help page is topic 2 and is defined
+in TOYPREFS. If you want to change this, use a help context file
+to override the TOYPREFS value, see TOYPREFS.
+
+
+.topic UsingHelp
+
+  Using Help
+
+In the BP IDE, File³Using help brings up the Help On Help topic.
+Press F1 to see that topic now.
+
+
+
+.topic VideoIntro
+
+    Welcome to TVToys 1.4  Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+TVToys is a collection of stuff useful to every TV programmer.
+This is the Video demonstration program,
+the Video menu above lets you use any video mode available on your
+video card. You can change the screen font, even to a font you designed
+yourself. One such font is included.
+
+  { What's new :New}
+
+.topic HelpIntro
+
+    Welcome to TVToys 1.4  Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+TVToys is a collection of stuff useful to every TV programmer.
+This is the Help demonstration program,
+what you see now is an improved help viewer with back tracking,
+a Contents page and a Help on Help page. It's completely configurable,
+your choice of keys and help topics with some caveats on topic 0.
+
+  { What's new :New}           { Demo topics :Contents}
+
+.topic RezIntro
+
+    Welcome to TVToys 1.4  Ü
+  ßßßßßßßßßßßßßßßßßßßßßßßßßß
+This demonstration program is slightly different, it's a somewhat
+experimental programming illustration. RESTEST uses a config file to
+save video mode info, automatic video detection flags and the last TV
+video state on exit. Try to run the program more than once.
+
+It first creates a resource file, with one font in it (Choosing the
+third entry on the Lines menu or the "This is a font resource!" in
+the font selection dialog will load the font from the resource file)
+
+RESTEST will then ask you what video detection you want. If you unselect
+VESA or Video 7, RESTEST will never look for them.
+
+  { What's new :New}
+
+.topic New
+
+    TVToys News  Ü
+  ßßßßßßßßßßßßßßßß
+Version 1.4 now includes:
+
+ Video card palette routines, TV palette changing dialog
+ An improved Color Selection Dialog
+ Instant dragging scrollbars
+ Several help bugs fixed, one was TVToys'
+ All stream registration in one file
+
+You must now EXPLICITLY assign a value to VideoModeChanged to
+retain font and palette changes, ReloadLastFont is gone.
+
+  { What's old :Old}
+
+.topic Old
+
+    What TVToys Is  Ü
+  ßßßßßßßßßßßßßßßßßßß
+ An improved HelpFile with back tracking and several bug fixes
+ Video mode searching and selection dialog
+ EGA, VGA, SVGA, Video 7 and VESA supported
+ Complete font support, font selection dialog, font resources
+ Mouse fix for extended video modes
+ An ExeStream unit, put your real mode help file in the EXE
+
+ Three demonstration programs
+ Several configuration files for easy tweaking
+ Truly configurable help contexts
+ TVToys DOES NOT SUPPORT smFont8x8, use ToggleVideoLines
+
+ Also see the Changes section in README.TXT
+
+
+
+.topic TopicA
+
+Topic A
+
+  {TopicB}
+  {TopicC}
+
+.topic TopicB
+
+Topic B
+
+  {TopicA}
+  {TopicC}
+
+.topic TopicC
+
+Topic C
+
+  {TopicA}
+  {TopicB}
+
+
+
+
+.topic OK
+ OK
+.topic Cancel
+ Cancel
+
+.topic toyVVideoLines
+.topic toyVVideoMode
+.topic toyVSelectFont
+.topic toyV14p
+.topic toyV16p
+.topic toyV8p
+
+.topic toyVideoDialogHelp
+.topic toyVideoListBox
+.topic toyVideoPreview
+.topic toyVideoRescan
+
+.topic toyVTCheckVesa
+.topic toyVTCheckV7
+.topic toyVTDialogHelp
+
+.topic toyFontListBox
+.topic toyFontDialogHelp
+
+.topic toyHHelp
+.topic toyHPreviousTopic
+.topic toyHUsingHelp
+
+.topic toyOVideoTests
+
+
+.topic toyVPBlue
+.topic toyVPGreen
+.topic toyVPRed
+.topic toyVPDialogHelp
+
+
+.topic toyCSBackground
+.topic toyCSForeground
+.topic toyCSGroup
+.topic toyCSItem
+.topic toyCSMonoSelector
+.topic toyCSPropagation

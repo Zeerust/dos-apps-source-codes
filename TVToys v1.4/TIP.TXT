@@ -1,0 +1,367 @@
+
+  TIP.TXT
+
+  TVToys extra
+  PJB 1993, Internet mail to d91-pbr@nada.kth.se
+
+
+Here are some general ideas that might and might not be
+of interest to you.
+
+-----
+
+Do you have problems with SmartDrive not saving your programs before
+they crash your computer? Try adding this code snippet before
+MyApp.Init and SmartDrv will flush (write) its contents before your
+program starts. You might want to enclose it with {$IFDEF Debug}
+or something similar.
+
+  (* Flush SmartDrive disk cache, equivalent to "smartdrv /c" *)
+  asm
+    mov ax,4A10h
+    mov bx,1
+    int 2Fh
+  end;
+
+
+-----
+
+Do you want your program to retain the startup video mode even if
+it is not recognized by Turbo Vision, like extended video modes?
+
+Try this to keep the startup video mode active:
+
+  begin
+    if IsProbablyTextMode then
+      PreventModeSwitch;
+    MyApp.Init;
+    MyApp.Run;
+    MyApp.Done;
+  end.
+
+The PreventModeSwitch makes Turbo Vision "forget" about resetting the
+video mode to 2, 3 or 7. Use PreventModeSwitch before every call to
+InitVideo (called by TApplication.Init and DosShell etc) to make Turbo
+Vision accept the current video mode.
+
+You can also put the if statement in your application's Init,
+just make sure it executes before the inherited Init, like this:
+
+  constructor MyApp.Init;
+  begin
+    if IsProbablyTextMode then
+      PreventModeSwitch;
+    inherited Init;
+  end;
+
+See also: RESTEST.PAS
+
+
+-----
+
+Are you short of memory and don't use the Tile/Cascade commands?
+Make your MyApp.HandleEvent inherit TProgram's HandleEvent, not
+TApplication's. That is, change your MyApp.HandleEvent's
+
+  inherited HandleEvent(Event);
+
+into
+
+  TProgram.HandleEvent(Event);
+
+TApplication also responds to cmDosShell, so you need to respond to
+that yourself.
+
+This makes your EXE file 2K (1940 bytes) smaller.
+
+
+-----
+
+Are you still short of memory? If you change HelpFile's TStreamRecs
+so that neither has a Store you save 1.5K in TP6, but only 600 bytes
+in BP7. Check out the Patch lines below.
+Remember that you can't recompile TVHC without the Stores,
+(well... you can, but TVHC won't work) so keep a copy of the original
+HelpFile.
+
+
+  RHelpTopic: TStreamRec = (
+     ObjType: 10000;
+     VmtLink: Ofs(TypeOf(THelpTopic)^);
+     Load:    @THelpTopic.Load;
+     Store:   Nil                         {Patch}
+  );
+  RHelpIndex: TStreamRec = (
+     ObjType: 10001;
+     VmtLink: Ofs(TypeOf(THelpIndex)^);
+     Load:    @THelpIndex.Load;
+     Store:   Nil                         {Patch}
+  );
+
+
+-----
+
+Here are my favourite time saving BP IDE macros.
+Please note that undoing the effects of any of these macros can
+be very unreliable. Undo works better if you select group undo, I think.
+
+
+  (* This macro inserts "begin", a blank line, "end" and positions
+     the cursor on the blank line *)
+
+  MACRO PutBeginEnd
+    InsertText("begin\nend;");
+    CursorUp;
+    RightOfLine;
+    InsertText("\n  ");
+  END;
+
+
+  (* This macro just inserts "{$}" and puts the cursor inside *)
+
+  MACRO PutDefine
+    InsertText("{$}");
+    CursorLeft;
+  END;
+
+
+  (* HERE IS A LIFE SAVER: it encloses the currently marked block with
+     "begin" and "end" keywords. You can do something similar for
+     {IFDEF} {ENDIF} and comments maybe *)
+
+  MACRO MakeBlock
+    MoveToBlockBeg;
+    CursorUp;
+    RightOfLine;
+    InsertText("\n");
+    InsertText("begin\nend;");
+    LeftOfLine;
+    MoveBlock;
+
+    MoveToBlockEnd;
+  END;
+
+
+  (* Here is a macro that produces button like shadows for use in help
+     files. To use it, type a header and execute the macro on the same
+     line. The current line is indented, a "Ü" is appended and the next
+     line is completely overwritten with a shadow. If you change the
+     header, just delete the trailing "Ü" and reexecute the macro.
+
+  MACRO MakeHelpShadow
+    CursorDown;
+    LeftOfLine;
+    InsertText("  ßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßßß");
+    LeftOfLine;
+    CursorUp;
+    InsertText(" ");
+    LeftOfLine;
+    DeleteWord;
+    InsertText("    ");
+    RightOfLine;
+    InsertText("  Ü");
+    CursorDown;
+    DeleteToEol;
+  END;
+
+
+  (* I find that I use this command all the time, along with its move
+     companion. It copies a block but it places the cursor AFTER the
+     block, not before. Saves me A LOT of typing, now if I only could
+     figure out where to put the clipboard equivalent... *)
+
+  MACRO CopyMoveAfter
+    CopyBlock;
+    MoveToBlockEnd;
+  END;
+
+-----
+
+If you have a word wrapping text editor, you can install it as a tool in
+BP (!) to do word wrap or other tasks that BP doesn't handle. The $LINE
+macro is especially useful if only your editor supports it!
+
+
+-----
+
+Have you dreamed about ForEach style procedure calls? Don't like
+assembler? Here is one way to do it.
+
+Let's implement TCollection.ForEach as a demonstration.
+
+Here is what you need:
+
+    (*******************************************************************
+      Below is a small system to call local procedures without
+      resorting to assembler.
+    *******************************************************************)
+    procedure DoNothing; far; assembler; asm end;
+
+    const
+      PushParameters : pointer = @DoNothing;
+
+    type
+      JumpToProc = procedure;
+
+    {$IFDEF Windows}
+      procedure PushPreviousBP; inline($8B/$46/$00/$24/$FE/$50);
+        (* MOV  AX,[BP]
+           AND  AL,0FEh
+           PUSH AX *)
+    {$ELSE}
+      procedure PushPreviousBP; inline($FF/$76/$00); (* PUSH WORD PTR [BP] *)
+    {$ENDIF}
+
+
+(*  You then need a procedural-type:  *)
+
+    type
+      ActionProc = procedure (P:Pointer);
+
+    (*******************************************************************
+    *******************************************************************)
+
+    procedure TCollection.ForEach(Action:Pointer);
+      var
+        I : integer;
+    begin
+      for I:=0 to Count-1 do
+      begin
+        (* What we want to do:   Action(Items^[I])
+           where Action is a pointer to a far procedure of the same
+           type as ActionProc.
+           The problem is that ActionProc(Action)(Items^[I])
+           doesn't set up the stack properly since we're calling
+           a LOCAL procedure *)
+
+        (* 1) First push the parameters: Simulate a call to an AddModeProc
+           while really calling a RETF, thus leaving the parameters on
+           the stack *)
+        ActionProc(PushParameters) (Items^[I]);
+
+        (* 2) Push the previous BP to set up the stack properly *)
+        PushPreviousBP;
+
+        (* 3) Call the procedure: JumpToProc is just a type cast to make
+           the compiler think that Action takes no parameters *)
+        JumpToProc(Action);
+      end;
+    end;
+
+    (*******************************************************************
+    *******************************************************************)
+
+Assembler speaking, this is almost what happens:
+
+    asm
+      (* 1 *)
+      LES  DI,Items^[I]            (* Pseudo *)
+      PUSH ES
+      PUSH DI
+
+      {Meaningless DoNothing funtion call removed}
+
+      (* 2 *)
+      PUSH WORD PTR [BP]
+
+      (* 3 *)
+      CALL FAR Action
+    end;
+
+
+-----
+
+  Here is what ScanEVGAModes in VIDEO.PAS used to look like
+
+  (*******************************************************************
+    procedure ScanVideoModes(First:Byte; AddMode:Pointer);
+      First:   First video mode to try
+      AddMode: Procedure to call for each valid text video mode.
+
+      ScanVideoModes attempts to find out what video modes are available.
+      It tries to set every video mode possible, checking to see if
+      the BIOS put valid data for a text mode in the BIOS data segment.
+      ScanVideoModes starts at mode First and works its way up to mode
+      127. Every time a valid Text video mode is found, AddMode is called.
+      AddMode should be a FAR procedure with the same parameters as an
+      AddModeProc.
+
+      þ ScanVideoModes behaves like ForEach (TGroup, TCollection)
+        in Turbo Vision. AddMode MUST be a local procedure
+        (a procedure inside another procedure) and since the
+        parameter has to be a pointer, no checks will be made
+        whatsoever on the parameter AddMode. Your program could
+        easily crash if you use the wrong kind of procedure.
+  *******************************************************************)
+  procedure ScanEVGAModes(First:byte; AddMode:AddModeProc);
+    var
+      Mode : byte;
+      Rows, Columns : byte;
+  begin
+    for Mode:=First to 127 do
+      if (Mode<>$0B) and (Mode<>$0C) then (* Skip reserved internal modes *)
+      begin
+        SetMode(Mode or $80);
+        NoRefresh;
+
+        Rows:=Mem[Seg0040:CrtRows]+1;
+        Columns:=Mem[Seg0040:CrtWidth];
+        if (Mode=GetMode and $7F) and IsProbablyTextMode then
+        begin
+          (* First push the parameters: Simulate a call to an AddModeProc
+             while really calling a RETF, thus leaving the parameters on
+             the stack *)
+          AddModeProc(PushParameters)
+            (Mode, Rows, Columns, Mem[Seg0040:CrtPoints], IsColorMode);
+          (* Push the previous BP to set up the stack properly *)
+          PushPreviousBP;
+          (* Call the procedure: JumpToProc is just a type cast to make
+             the compiler think that AddMode takes no parameters *)
+          JumpToProc(AddMode);
+        end;
+      end;
+    end;
+
+-----
+
+Here is a very different way to call local procedures (see above):
+I find it less intuitive.
+
+
+  (* NewActionProc corresponds to ActionProc above. Here, Action
+     MUST be the last parameter for CallLocalProc to work. *)
+  type
+    NewActionProc = procedure (P:Pointer; Action:Pointer);
+
+  procedure __CallLocalProc; far; assembler;
+  asm
+    POP  AX
+    POP  BX
+    POP  CX
+    POP  DX
+
+    {$IFDEF Windows}
+    MOV  AX,[BP]
+    AND  AL,0FEH
+    PUSH AX
+    {$ELSE}
+    PUSH [BP].WORD
+    {$ENDIF}
+
+    PUSH BX
+    PUSH AX
+    PUSH DX
+    PUSH CX
+  end;
+
+  const
+    CallLocalProc : procedure = __CallLocalProc;
+
+  procedure TCollection.ForEach(Action:Pointer);
+    var
+      I : integer;
+  begin
+    for I:=0 to Count-1 do
+      NewActionProc(CallLocalProc) (Items^[I], Action);
+  end;
+
